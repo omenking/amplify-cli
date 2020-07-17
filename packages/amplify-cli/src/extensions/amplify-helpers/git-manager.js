@@ -51,8 +51,9 @@ function getGitIgnoreAppendString() {
     'aws-exports.js',
     'awsconfiguration.json',
     'amplifyconfiguration.json',
+    'amplify-build-config.json',
     'amplify-gradle-config.json',
-    'amplifyxc.config',
+    'amplifytools.xcconfig',
   ];
 
   const toAppend = `${os.EOL + os.EOL + amplifyMark + os.EOL}${ignoreList.join(os.EOL)}`;

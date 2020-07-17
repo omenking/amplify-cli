@@ -11,6 +11,7 @@ const setupNewUser = require('./lib/setup-new-user');
 const { displayHelpfulURLs } = require('./lib/display-helpful-urls');
 const aws = require('./src/aws-utils/aws');
 const pinpoint = require('./src/aws-utils/aws-pinpoint');
+const { getLexRegionMapping } = require('./src/aws-utils/aws-lex');
 const amplifyService = require('./src/aws-utils/aws-amplify');
 const consoleCommand = require('./lib/console');
 const { loadResourceParameters, saveResourceParameters } = require('./src/resourceParams');
@@ -66,8 +67,8 @@ async function getConfiguredAWSClient(context, category, action) {
   return aws;
 }
 
-function getConfiguredPinpointClient(context, category, action, options = {}) {
-  return pinpoint.getConfiguredPinpointClient(context, category, action, options);
+function getConfiguredPinpointClient(context, category, action, envName) {
+  return pinpoint.getConfiguredPinpointClient(context, category, action, envName);
 }
 
 function getPinpointRegionMapping() {
@@ -106,6 +107,7 @@ module.exports = {
   setupNewUser,
   getConfiguredAWSClient,
   getPinpointRegionMapping,
+  getLexRegionMapping,
   getConfiguredPinpointClient,
   getConfiguredAmplifyClient,
   showHelpfulLinks,

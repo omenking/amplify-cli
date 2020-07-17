@@ -22,10 +22,12 @@ import {
   TRANSFORM_BASE_VERSION,
   TRANSFORM_CURRENT_VERSION,
   TransformConfig,
+  ConflictHandlerType,
+  ConflictDetectionType,
+  ResolverConfig,
   SyncConfig,
 } from './util/transformConfig';
 import { EXTRA_DIRECTIVES_DOCUMENT } from './validation';
-
 export * from './errors';
 export * from './util';
 
@@ -56,6 +58,9 @@ export {
   TRANSFORM_CONFIG_FILE_NAME,
   TRANSFORM_BASE_VERSION,
   TRANSFORM_CURRENT_VERSION,
+  ConflictHandlerType,
+  ConflictDetectionType,
+  ResolverConfig,
   SyncConfig,
   DeploymentResources,
 };

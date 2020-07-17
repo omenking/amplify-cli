@@ -6,13 +6,13 @@ import { ModelAuthTransformer } from 'graphql-auth-transformer';
 import * as fs from 'fs';
 import { CloudFormationClient } from '../CloudFormationClient';
 import { Output } from 'aws-sdk/clients/cloudformation';
-import * as CognitoClient from 'aws-sdk/clients/cognitoidentityserviceprovider';
-import * as S3 from 'aws-sdk/clients/s3';
+import { default as CognitoClient } from 'aws-sdk/clients/cognitoidentityserviceprovider';
+import { default as S3 } from 'aws-sdk/clients/s3';
 import { GraphQLClient } from '../GraphQLClient';
 import { S3Client } from '../S3Client';
 import * as path from 'path';
 import { deploy } from '../deployNestedStacks';
-import * as moment from 'moment';
+import { default as moment } from 'moment';
 import emptyBucket from '../emptyBucket';
 import {
   createUserPool,
@@ -57,7 +57,7 @@ describe(`ModelAuthTests`, async () => {
   let GRAPHQL_CLIENT_2 = undefined;
 
   /**
-   * Client 3 is logged in and has no group memberships.
+   * Client 3 is logged in and is a member of the Devs-Admin group via an access token.
    */
   let GRAPHQL_CLIENT_3 = undefined;
 
@@ -71,6 +71,7 @@ describe(`ModelAuthTests`, async () => {
 
   const ADMIN_GROUP_NAME = 'Admin';
   const DEVS_GROUP_NAME = 'Devs';
+  const DEVS_ADMIN_GROUP_NAME = 'Devs-Admin';
   const PARTICIPANT_GROUP_NAME = 'Participant';
   const WATCHER_GROUP_NAME = 'Watcher';
 
@@ -104,8 +105,8 @@ describe(`ModelAuthTests`, async () => {
       type Post @model @auth(rules: [{ allow: owner }]) {
           id: ID!
           title: String!
-          createdAt: String
-          updatedAt: String
+          createdAt: AWSDateTime
+          updatedAt: AWSDateTime
           owner: String
       }
       type Salary @model @auth(
@@ -228,7 +229,7 @@ describe(`ModelAuthTests`, async () => {
         LOCAL_FS_BUILD_DIR,
         BUCKET_NAME,
         S3_ROOT_DIR_KEY,
-        BUILD_TIMESTAMP
+        BUILD_TIMESTAMP,
       );
       expect(finishedStack).toBeDefined();
       const getApiEndpoint = outputValueSelector(ResourceConstants.OUTPUTS.GraphQLAPIEndpointOutput);
@@ -256,10 +257,12 @@ describe(`ModelAuthTests`, async () => {
       await createGroup(USER_POOL_ID, PARTICIPANT_GROUP_NAME);
       await createGroup(USER_POOL_ID, WATCHER_GROUP_NAME);
       await createGroup(USER_POOL_ID, DEVS_GROUP_NAME);
+      await createGroup(USER_POOL_ID, DEVS_ADMIN_GROUP_NAME);
       await addUserToGroup(ADMIN_GROUP_NAME, USERNAME1, USER_POOL_ID);
       await addUserToGroup(PARTICIPANT_GROUP_NAME, USERNAME1, USER_POOL_ID);
       await addUserToGroup(WATCHER_GROUP_NAME, USERNAME1, USER_POOL_ID);
       await addUserToGroup(DEVS_GROUP_NAME, USERNAME2, USER_POOL_ID);
+      await addUserToGroup(DEVS_ADMIN_GROUP_NAME, USERNAME3, USER_POOL_ID);
       const authResAfterGroup: any = await signupAndAuthenticateUser(USER_POOL_ID, USERNAME1, TMP_PASSWORD, REAL_PASSWORD);
 
       const idToken = authResAfterGroup.getIdToken().getJwtToken();
@@ -272,7 +275,8 @@ describe(`ModelAuthTests`, async () => {
       const idToken2 = authRes2AfterGroup.getIdToken().getJwtToken();
       GRAPHQL_CLIENT_2 = new GraphQLClient(GRAPHQL_ENDPOINT, { Authorization: idToken2 });
 
-      const idToken3 = authRes3.getIdToken().getJwtToken();
+      const authRes3AfterGroup: any = await signupAndAuthenticateUser(USER_POOL_ID, USERNAME3, TMP_PASSWORD, REAL_PASSWORD);
+      const idToken3 = authRes3AfterGroup.getIdToken().getJwtToken();
       GRAPHQL_CLIENT_3 = new GraphQLClient(GRAPHQL_ENDPOINT, { Authorization: idToken3 });
 
       // Wait for any propagation to avoid random
@@ -322,7 +326,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response);
     expect(response.data.createPost.id).toBeDefined();
@@ -341,7 +345,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response2);
     expect(response2.data.createPost.id).toBeDefined();
@@ -362,7 +366,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(response.data.createPost.id).toBeDefined();
     expect(response.data.createPost.title).toEqual('Hello, World!');
@@ -379,7 +383,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(getResponse.data.getPost.id).toBeDefined();
     expect(getResponse.data.getPost.title).toEqual('Hello, World!');
@@ -397,7 +401,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(getResponseAccess.data.getPost.id).toBeDefined();
     expect(getResponseAccess.data.getPost.title).toEqual('Hello, World!');
@@ -417,7 +421,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(response.data.createPost.id).toBeDefined();
     expect(response.data.createPost.title).toEqual('Hello, World!');
@@ -434,7 +438,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(getResponse.data.getPost).toEqual(null);
     expect(getResponse.errors.length).toEqual(1);
@@ -452,7 +456,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(response.data.createPost.id).toBeDefined();
     expect(response.data.createPost.title).toEqual('Hello, World!');
@@ -469,7 +473,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(updateResponse.data.updatePost.id).toEqual(response.data.createPost.id);
     expect(updateResponse.data.updatePost.title).toEqual('Bye, World!');
@@ -485,7 +489,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(updateResponseAccess.data.updatePost.id).toEqual(response.data.createPost.id);
     expect(updateResponseAccess.data.updatePost.title).toEqual('Bye, World!');
@@ -503,7 +507,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(response.data.createPost.id).toBeDefined();
     expect(response.data.createPost.title).toEqual('Hello, World!');
@@ -520,7 +524,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(updateResponse.data.updatePost).toEqual(null);
     expect(updateResponse.errors.length).toEqual(1);
@@ -538,7 +542,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(response.data.createPost.id).toBeDefined();
     expect(response.data.createPost.title).toEqual('Hello, World!');
@@ -551,7 +555,7 @@ describe(`ModelAuthTests`, async () => {
               id
           }
       }`,
-      {}
+      {},
     );
     expect(deleteResponse.data.deletePost.id).toEqual(response.data.createPost.id);
 
@@ -565,7 +569,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(responseAccess.data.createPost.id).toBeDefined();
     expect(responseAccess.data.createPost.title).toEqual('Hello, World!');
@@ -578,7 +582,7 @@ describe(`ModelAuthTests`, async () => {
               id
           }
       }`,
-      {}
+      {},
     );
     expect(deleteResponseAccess.data.deletePost.id).toEqual(responseAccess.data.createPost.id);
   });
@@ -594,7 +598,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(response.data.createPost.id).toBeDefined();
     expect(response.data.createPost.title).toEqual('Hello, World!');
@@ -607,7 +611,7 @@ describe(`ModelAuthTests`, async () => {
               id
           }
       }`,
-      {}
+      {},
     );
     expect(deleteResponse.data.deletePost).toEqual(null);
     expect(deleteResponse.errors.length).toEqual(1);
@@ -625,7 +629,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     expect(firstPost.data.createPost.id).toBeDefined();
     expect(firstPost.data.createPost.title).toEqual('testing list');
@@ -642,7 +646,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     // There are two posts but only 1 created by me.
     const listResponse = await GRAPHQL_CLIENT_1.query(
@@ -653,7 +657,7 @@ describe(`ModelAuthTests`, async () => {
               }
           }
       }`,
-      {}
+      {},
     );
     console.log(JSON.stringify(listResponse, null, 4));
     expect(listResponse.data.listPosts.items.length).toEqual(1);
@@ -666,7 +670,7 @@ describe(`ModelAuthTests`, async () => {
               }
           }
       }`,
-      {}
+      {},
     );
     console.log(JSON.stringify(listResponseAccess, null, 4));
     expect(listResponseAccess.data.listPosts.items.length).toEqual(1);
@@ -969,6 +973,46 @@ describe(`ModelAuthTests`, async () => {
     expect(req.data.createManyGroupProtected).toEqual(null);
     expect(req.errors.length).toEqual(1);
     expect((req.errors[0] as any).errorType).toEqual('Unauthorized');
+  });
+
+  test(`Test updateSingleGroupProtected when user is not authorized but has a group that is a substring of the allowed group`, async () => {
+    const req = await GRAPHQL_CLIENT_3.query(
+      `mutation {
+        createSingleGroupProtected(input: { value: 11, group: "Devs-Admin" }) {
+          id
+          value
+          group
+        }
+      }
+    `,
+    );
+
+    console.log(JSON.stringify(req, null, 4));
+    const req2 = await GRAPHQL_CLIENT_2.query(
+      `mutation {
+        updateSingleGroupProtected(input: {id: "${req.data.createSingleGroupProtected.id}", value: 5 }) {
+          id
+          value
+          group
+        }
+      }
+    `,
+    );
+    console.log(JSON.stringify(req2, null, 4));
+    const req3 = await GRAPHQL_CLIENT_3.query(
+      `query {
+        getSingleGroupProtected(id: "${req.data.createSingleGroupProtected.id}") {
+          id
+          value
+          group
+        }
+      }
+    `,
+    );
+    console.log(JSON.stringify(req3, null, 4));
+    expect(req.data.createSingleGroupProtected.value).toEqual(11);
+    expect(req.data.createSingleGroupProtected.value).toEqual(req3.data.getSingleGroupProtected.value);
+    expect((req2.errors[0] as any).errorType).toEqual('DynamoDB:ConditionalCheckFailedException');
   });
 
   test(`Test createSingleGroupProtected w/ dynamic group protection authorized`, async () => {
@@ -2518,7 +2562,7 @@ describe(`ModelAuthTests`, async () => {
               }
           }
       }`,
-      {}
+      {},
     );
     const relevantPost = listResponse.data.listTestIdentitys.items.find(p => p.id === getReq.data.getTestIdentity.id);
     console.log(JSON.stringify(listResponse, null, 4));
@@ -2556,7 +2600,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response);
     expect(response.data.createOwnerReadProtected.id).toBeDefined();
@@ -2569,7 +2613,7 @@ describe(`ModelAuthTests`, async () => {
               id content owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response2);
     expect(response2.data.getOwnerReadProtected).toBeNull();
@@ -2581,7 +2625,7 @@ describe(`ModelAuthTests`, async () => {
               id content owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response3);
     expect(response3.data.getOwnerReadProtected.id).toBeDefined();
@@ -2596,7 +2640,7 @@ describe(`ModelAuthTests`, async () => {
               }
           }
       }`,
-      {}
+      {},
     );
     console.log(response4);
     expect(response4.data.listOwnerReadProtecteds.items.length).toBeGreaterThanOrEqual(1);
@@ -2609,7 +2653,7 @@ describe(`ModelAuthTests`, async () => {
               }
           }
       }`,
-      {}
+      {},
     );
     console.log(response5);
     expect(response5.data.listOwnerReadProtecteds.items).toHaveLength(0);
@@ -2624,7 +2668,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response);
     expect(response.data.createOwnerCreateUpdateDeleteProtected.id).toBeDefined();
@@ -2639,7 +2683,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response2);
     expect(response2.data.createOwnerCreateUpdateDeleteProtected).toBeNull();
@@ -2655,7 +2699,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response);
     expect(response.data.createOwnerCreateUpdateDeleteProtected.id).toBeDefined();
@@ -2675,7 +2719,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response2);
     expect(response2.data.updateOwnerCreateUpdateDeleteProtected).toBeNull();
@@ -2694,7 +2738,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response3);
     expect(response3.data.updateOwnerCreateUpdateDeleteProtected.id).toBeDefined();
@@ -2711,7 +2755,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response);
     expect(response.data.createOwnerCreateUpdateDeleteProtected.id).toBeDefined();
@@ -2730,7 +2774,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response2);
     expect(response2.data.deleteOwnerCreateUpdateDeleteProtected).toBeNull();
@@ -2748,7 +2792,7 @@ describe(`ModelAuthTests`, async () => {
               owner
           }
       }`,
-      {}
+      {},
     );
     console.log(response3);
     expect(response3.data.deleteOwnerCreateUpdateDeleteProtected.id).toBeDefined();

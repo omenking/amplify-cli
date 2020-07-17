@@ -150,6 +150,9 @@ async function serviceWalkthrough(context, defaultValuesFilename, stringMapsFile
 
   // if user selects user pool only, ensure that we clean id pool options
   if (coreAnswers.authSelections === 'userPoolOnly' && context.updatingAuth) {
+    context.print.warning(
+      `Warning! Your existing IdentityPool: ${context.updatingAuth.identityPoolName} will be deleted upon the next “amplify push”!`,
+    );
     delete context.updatingAuth.identityPoolName;
     delete context.updatingAuth.allowUnauthenticatedIdentities;
     delete context.updatingAuth.thirdPartyAuth;
@@ -207,7 +210,7 @@ async function updateUserPoolGroups(context) {
     context.amplify.pathManager.getBackendDirPath(),
     'auth',
     'userPoolGroups',
-    'user-pool-group-precedence.json'
+    'user-pool-group-precedence.json',
   );
 
   try {
@@ -436,7 +439,7 @@ function userPoolProviders(oAuthProviders, coreAnswers, prevAnswers) {
           attributes_request_method: answers.oidcAppOIDCAttributesRequestMethod,
           AttributeMapping: maps,
         };
-      })
+      }),
     );
     res.hostedUIProviderCreds = JSON.stringify(
       oAuthProviders.map(el => ({
@@ -619,7 +622,7 @@ function getIAMPolicies(resourceName, crudOptions) {
           'cognito-idp:ChangePassword',
           'cognito-idp:ConfirmDevice',
           'cognito-idp:AdminResetUserPassword',
-          'cognito-idp:ResendConfirmationCode'
+          'cognito-idp:ResendConfirmationCode',
         );
         break;
       case 'update':
@@ -635,7 +638,7 @@ function getIAMPolicies(resourceName, crudOptions) {
           'cognito-idp:UpdateGroup',
           'cognito-idp:AdminUpdateAuthEventFeedback',
           'cognito-idp:UpdateDeviceStatus',
-          'cognito-idp:UpdateUserPool'
+          'cognito-idp:UpdateUserPool',
         );
         break;
       case 'read':
@@ -653,7 +656,7 @@ function getIAMPolicies(resourceName, crudOptions) {
           'cognito-sync:List*',
           'iam:ListOpenIdConnectProviders',
           'iam:ListRoles',
-          'sns:ListPlatformApplications'
+          'sns:ListPlatformApplications',
         );
         break;
       case 'delete':
@@ -667,7 +670,7 @@ function getIAMPolicies(resourceName, crudOptions) {
           'cognito-idp:DeleteUserPool',
           'cognito-idp:AdminDeleteUser',
           'cognito-idp:DeleteIdentityProvider',
-          'cognito-idp:DeleteUser'
+          'cognito-idp:DeleteUser',
         );
         break;
       default:

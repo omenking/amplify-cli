@@ -3,6 +3,151 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.4](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.17.3...amplify-category-analytics@2.17.4) (2020-07-15)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.17.3](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.17.2...amplify-category-analytics@2.17.3) (2020-07-14)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.17.2](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.17.1...amplify-category-analytics@2.17.2) (2020-07-11)
+
+
+### Bug Fixes
+
+* **cli:** remove unnecessary stack trace log when adding services ([#4610](https://github.com/aws-amplify/amplify-cli/issues/4610)) ([5bee574](https://github.com/aws-amplify/amplify-cli/commit/5bee574bbcd956c032e7714b0813aedd7914a6cb))
+
+
+### Reverts
+
+* Revert problematic PRs (#4803) ([7f38d81](https://github.com/aws-amplify/amplify-cli/commit/7f38d81ef2f890c25d39b02407c5255c8760c511)), closes [#4803](https://github.com/aws-amplify/amplify-cli/issues/4803) [#4796](https://github.com/aws-amplify/amplify-cli/issues/4796) [#4576](https://github.com/aws-amplify/amplify-cli/issues/4576) [#4575](https://github.com/aws-amplify/amplify-cli/issues/4575) [#4610](https://github.com/aws-amplify/amplify-cli/issues/4610)
+
+
+
+
+
+## [2.17.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.17.0...amplify-category-analytics@2.17.1) (2020-07-09)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+# [2.17.0](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.7...amplify-category-analytics@2.17.0) (2020-07-07)
+
+
+### Features
+
+* **cli:** usage measurement ([#3641](https://github.com/aws-amplify/amplify-cli/issues/3641)) ([30a7fe7](https://github.com/aws-amplify/amplify-cli/commit/30a7fe70f5838a766631befcc720a721e801bc5f))
+
+
+
+
+
+## [2.16.7](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.6...amplify-category-analytics@2.16.7) (2020-06-18)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.16.6](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.5...amplify-category-analytics@2.16.6) (2020-05-26)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.16.5](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.4...amplify-category-analytics@2.16.5) (2020-05-15)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.16.4](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.3...amplify-category-analytics@2.16.4) (2020-05-08)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.16.3](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.2...amplify-category-analytics@2.16.3) (2020-04-06)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.16.2](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.1...amplify-category-analytics@2.16.2) (2020-03-22)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.16.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.16.0...amplify-category-analytics@2.16.1) (2020-03-10)
+
+
+### Bug Fixes
+
+* **amplify-category-analytics:** delete pinpoint project in delete ([#3165](https://github.com/aws-amplify/amplify-cli/issues/3165)) ([acc0240](https://github.com/aws-amplify/amplify-cli/commit/acc0240c02630b4b9424370732706955ea447057)), closes [#2974](https://github.com/aws-amplify/amplify-cli/issues/2974)
+
+
+
+
+
+# [2.16.0](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.13.3...amplify-category-analytics@2.16.0) (2020-03-07)
+
+
+### Features
+
+* ability to add custom EventSource and lambda triggers via amplify add function, kinesis support in analytics category ([#2463](https://github.com/aws-amplify/amplify-cli/issues/2463)) ([b25cfd0](https://github.com/aws-amplify/amplify-cli/commit/b25cfd00b21416a82ecefda1f6498206ef71531b))
+
+
+
+
+
+## [2.14.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.13.5-beta.0...amplify-category-analytics@2.14.1) (2020-03-05)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.13.3](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.13.2...amplify-category-analytics@2.13.3) (2020-02-13)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
+## [2.13.2](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.13.1...amplify-category-analytics@2.13.2) (2020-02-07)
+
+**Note:** Version bump only for package amplify-category-analytics
+
+
+
+
+
 ## [2.13.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-analytics@2.13.0...amplify-category-analytics@2.13.1) (2020-01-24)
 
 **Note:** Version bump only for package amplify-category-analytics

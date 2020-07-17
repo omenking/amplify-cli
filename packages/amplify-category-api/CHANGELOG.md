@@ -3,6 +3,230 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.20.4](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.20.3...amplify-category-api@2.20.4) (2020-07-15)
+
+
+### Bug Fixes
+
+* **graphql-auth-transformer:** add a time delay when creating apiKey ([#4493](https://github.com/aws-amplify/amplify-cli/issues/4493)) ([1d56b40](https://github.com/aws-amplify/amplify-cli/commit/1d56b40d673b257e07905d9bc1830e8f9c8495a1))
+
+
+
+
+
+## [2.20.3](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.20.2...amplify-category-api@2.20.3) (2020-07-14)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.20.2](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.20.1...amplify-category-api@2.20.2) (2020-07-11)
+
+
+### Bug Fixes
+
+* **cli:** remove unnecessary stack trace log when adding services ([#4610](https://github.com/aws-amplify/amplify-cli/issues/4610)) ([5bee574](https://github.com/aws-amplify/amplify-cli/commit/5bee574bbcd956c032e7714b0813aedd7914a6cb))
+
+
+### Reverts
+
+* Revert problematic PRs (#4803) ([7f38d81](https://github.com/aws-amplify/amplify-cli/commit/7f38d81ef2f890c25d39b02407c5255c8760c511)), closes [#4803](https://github.com/aws-amplify/amplify-cli/issues/4803) [#4796](https://github.com/aws-amplify/amplify-cli/issues/4796) [#4576](https://github.com/aws-amplify/amplify-cli/issues/4576) [#4575](https://github.com/aws-amplify/amplify-cli/issues/4575) [#4610](https://github.com/aws-amplify/amplify-cli/issues/4610)
+
+
+
+
+
+## [2.20.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.20.0...amplify-category-api@2.20.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* validatePathName_validPath matcher ([#4559](https://github.com/aws-amplify/amplify-cli/issues/4559)) ([3cf5f91](https://github.com/aws-amplify/amplify-cli/commit/3cf5f914024e55904da0f782ea71bd62bfca40e3))
+
+
+
+
+
+# [2.20.0](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.8...amplify-category-api@2.20.0) (2020-07-07)
+
+
+### Features
+
+* **cli:** usage measurement ([#3641](https://github.com/aws-amplify/amplify-cli/issues/3641)) ([30a7fe7](https://github.com/aws-amplify/amplify-cli/commit/30a7fe70f5838a766631befcc720a721e801bc5f))
+* Lambda layers ([#4697](https://github.com/aws-amplify/amplify-cli/issues/4697)) ([c55b2e0](https://github.com/aws-amplify/amplify-cli/commit/c55b2e0c3377127aaf887591d7bc20d7240ef11d))
+
+
+
+
+
+## [2.19.8](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.7...amplify-category-api@2.19.8) (2020-06-25)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.19.7](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.6...amplify-category-api@2.19.7) (2020-06-18)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.19.6](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.5...amplify-category-api@2.19.6) (2020-06-11)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.19.5](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.4...amplify-category-api@2.19.5) (2020-06-10)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.19.4](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.3...amplify-category-api@2.19.4) (2020-06-02)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.19.3](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.2...amplify-category-api@2.19.3) (2020-05-26)
+
+
+### Bug Fixes
+
+* **amplify-category-api:** toggle datastore in update ([#4276](https://github.com/aws-amplify/amplify-cli/issues/4276)) ([c522f29](https://github.com/aws-amplify/amplify-cli/commit/c522f295304410aeb1d6f60aaba9b466d3304ee1)), closes [#4058](https://github.com/aws-amplify/amplify-cli/issues/4058)
+
+
+
+
+
+## [2.19.2](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.1...amplify-category-api@2.19.2) (2020-05-15)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.19.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.19.0...amplify-category-api@2.19.1) (2020-05-08)
+
+
+### Bug Fixes
+
+* incorrect type on graphql boilerplate schema ([#4070](https://github.com/aws-amplify/amplify-cli/issues/4070)) ([d96171a](https://github.com/aws-amplify/amplify-cli/commit/d96171a7461ecbb610c3cbcbcb05cdf5492dc8e5))
+
+
+
+
+
+# [2.19.0](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.18.0...amplify-category-api@2.19.0) (2020-04-23)
+
+
+### Features
+
+* **amplify-category-api:** allow minified CF stack templates ([#3520](https://github.com/aws-amplify/amplify-cli/issues/3520)) ([6da2a63](https://github.com/aws-amplify/amplify-cli/commit/6da2a634548fdf48deb4b1144c67d1e1515abb80)), closes [#2914](https://github.com/aws-amplify/amplify-cli/issues/2914)
+
+
+
+
+
+# [2.18.0](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.17.1...amplify-category-api@2.18.0) (2020-04-06)
+
+
+### Features
+
+* uplevel enabling of datastore and update of auth configs to top ([#3495](https://github.com/aws-amplify/amplify-cli/issues/3495)) ([f406bb2](https://github.com/aws-amplify/amplify-cli/commit/f406bb29957c98caf427a3cb46e2126f6dcf212f))
+
+
+
+
+
+## [2.17.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.17.0...amplify-category-api@2.17.1) (2020-03-26)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+# [2.17.0](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.16.1...amplify-category-api@2.17.0) (2020-03-22)
+
+
+### Bug Fixes
+
+* **cli:** deleting the amplify app on delete ([#3568](https://github.com/aws-amplify/amplify-cli/issues/3568)) ([f39bbcb](https://github.com/aws-amplify/amplify-cli/commit/f39bbcb715875eeeb612bcbc40b275b33f85eaf6)), closes [#3239](https://github.com/aws-amplify/amplify-cli/issues/3239)
+* update graphql schema to match docs ([#3652](https://github.com/aws-amplify/amplify-cli/issues/3652)) ([dc3c866](https://github.com/aws-amplify/amplify-cli/commit/dc3c8661066be6bfdbb404b81a73bfed1fcf0095)), closes [#3513](https://github.com/aws-amplify/amplify-cli/issues/3513)
+* **graphql-elasticsearch-transformer:** fix duplicate records in es lambda ([#3712](https://github.com/aws-amplify/amplify-cli/issues/3712)) ([dd9f7e0](https://github.com/aws-amplify/amplify-cli/commit/dd9f7e0031a0dc68a9027de02f60bbe69d315c3d)), closes [#3602](https://github.com/aws-amplify/amplify-cli/issues/3602) [#3705](https://github.com/aws-amplify/amplify-cli/issues/3705)
+
+
+### Features
+
+* **amplify-category-function:** refactor to support runtime and template plugins ([#3517](https://github.com/aws-amplify/amplify-cli/issues/3517)) ([607ae21](https://github.com/aws-amplify/amplify-cli/commit/607ae21287941805f44ea8a9b78dd12d16d71f85))
+
+
+
+
+
+## [2.16.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.16.0...amplify-category-api@2.16.1) (2020-03-10)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+# [2.16.0](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.13.3...amplify-category-api@2.16.0) (2020-03-07)
+
+
+### Bug Fixes
+
+* **amplify-category-api:** plumb api id to resources that require it ([#3464](https://github.com/aws-amplify/amplify-cli/issues/3464)) ([2b2d52f](https://github.com/aws-amplify/amplify-cli/commit/2b2d52f05edc1190953965ca0f3ecd880ec66a63)), closes [#3431](https://github.com/aws-amplify/amplify-cli/issues/3431) [#3386](https://github.com/aws-amplify/amplify-cli/issues/3386)
+
+
+### Features
+
+* **amplify-category-api:** support path parameters in REST APIs ([#3394](https://github.com/aws-amplify/amplify-cli/issues/3394)) ([fa7d07e](https://github.com/aws-amplify/amplify-cli/commit/fa7d07e1f6f54185a37851ea9d4c840b092501cc))
+
+
+
+
+
+## [2.14.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.13.5-beta.0...amplify-category-api@2.14.1) (2020-03-05)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.13.3](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.13.2...amplify-category-api@2.13.3) (2020-02-13)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
+## [2.13.2](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.13.1...amplify-category-api@2.13.2) (2020-02-07)
+
+**Note:** Version bump only for package amplify-category-api
+
+
+
+
+
 ## [2.13.1](https://github.com/aws-amplify/amplify-cli/compare/amplify-category-api@2.13.0...amplify-category-api@2.13.1) (2020-01-24)
 
 
